@@ -1,0 +1,7 @@
+FROM nginx:alpine
+
+# Copy static files from the build stage to the nginx directory
+COPY ./frontend/ /usr/share/nginx/html
+
+# Expose port 80
+EXPOSE 80

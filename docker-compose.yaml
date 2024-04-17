@@ -1,0 +1,25 @@
+version: '3'
+services:
+  backend:
+    build:
+      context: .
+      dockerfile: Dockerfile.backend
+    ports:
+      - "5000:5000"
+    depends_on:
+      - db
+  frontend:
+    build:
+      context: .
+      dockerfile: Dockerfile.frontend
+    ports:
+      - "80:80"
+  db:
+    image: mysql:5.7
+    environment:
+      MYSQL_ROOT_PASSWORD: jeet
+      MYSQL_DATABASE: bike_store
+      MYSQL_USER: new_user
+      MYSQL_PASSWORD: jeet
+    ports:
+      - "3306:3306"

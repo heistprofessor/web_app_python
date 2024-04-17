@@ -1,0 +1,29 @@
+pipeline {
+    agent any
+
+    stages {
+        stage('Build Backend, Frontend, and Web App') {
+            steps {
+                sh 'cd /home/ubuntu/webelight_practical/ && docker-compose build'
+            }
+        }
+        stage('Deploy to AWS EC2') {
+            steps {
+                sh '''
+                # SSH into AWS EC2 instance
+                ssh -o StrictHostKeyChecking=no ec2-user@54.204.71.85 <<EOF
+                    # Stop existing Docker containers
+                    docker-compose -f /home/ubuntu/webelight_practical/docker-compose.yaml down
+
+                    # Pull latest changes
+                    cd /path/to/your/project
+                    git pull
+
+                    # Start Docker containers
+                    docker-compose -f /home/ubuntu/webelight_practical/docker-compose.yaml up -d
+                EOF
+                '''
+            }
+        }
+    }
+}
