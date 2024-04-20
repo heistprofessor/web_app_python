@@ -23,5 +23,3 @@ CREATE TABLE inquiries (
     bike_id INT NOT NULL,
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );
-
-pip install email_validator
